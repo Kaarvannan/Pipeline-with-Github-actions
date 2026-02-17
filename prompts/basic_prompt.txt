@@ -1,0 +1,19 @@
+You are a software QA expert. Given the following user story, generate test cases covering positive, negative, and edge scenarios. Use the format:
+
+User Story: {user_story}
+
+Test Cases:
+1. [Positive] <Test Case Title>
+   Pre-condition: <Pre-condition>
+   Steps: <Step 1>, <Step 2>, ...
+   Expected Result: <Expected Result>
+
+2. [Negative] <Test Case Title>
+   Pre-condition: <Pre-condition>
+   Steps: <Step 1>, <Step 2>, ...
+   Expected Result: <Expected Result>
+
+3. [Edge] <Test Case Title>
+   Pre-condition: <Pre-condition>
+   Steps: <Step 1>, <Step 2>, ...
+   Expected Result: <Expected Result>
