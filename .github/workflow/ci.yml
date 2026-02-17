@@ -1,0 +1,23 @@
+name: CI Phase 1 - Basic Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout COde
+        uses: actions/checkout@v4
+
+      - name: Show current directory
+        run: pwd
+
+      - name: list all the filed in current directory
+        run: ls -la
+      
+      - name: Print success message
+        run: echo "Build successful!"
+
