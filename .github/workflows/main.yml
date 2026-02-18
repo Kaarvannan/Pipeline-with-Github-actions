@@ -25,7 +25,7 @@ jobs:
         id: set_tag
         run: |
           TAG=${GITHUB_SHA::7}
-          echo "image_tag=$TAG" >> $GITHUB_OUTPUT
+          echo "Image_used=$TAG" >> $GITHUB_OUTPUT
 
 
       - name: Build Docker Image
