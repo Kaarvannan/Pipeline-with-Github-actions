@@ -29,7 +29,7 @@ jobs:
 
 
       - name: Build Docker Image
-        run: docker build -t ${Image_tag} .
+        run: docker build -t ${needs.build.outputs.Image_used} .
 
   test:
     runs-on: ubuntu-latest
