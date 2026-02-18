@@ -15,9 +15,14 @@ jobs:
       - name: Show current directory
         run: pwd
 
+      - name: Dockerversion
+        run: docker --version
+
       - name: list all the filed in current directory
         run: ls -la
-      
+      - name: Build Docker Image
+        run: docker build -t test-app:${{ github.sha }} .
+
       - name: Print success message
         run: echo "Build successful!"
 
