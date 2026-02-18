@@ -29,7 +29,7 @@ jobs:
 
 
       - name: Build Docker Image
-        run: docker build -t ${steps.set_tag.outputs.Image_tag} .
+        run: docker build -t iris-app:${{steps.set_tag.outputs.Image_tag}} .
 
   test:
     runs-on: ubuntu-latest
