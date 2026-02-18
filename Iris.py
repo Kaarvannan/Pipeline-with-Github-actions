@@ -25,7 +25,8 @@ try:
         repo_id="Kaar7/Iris",
         filename="model.pkl",
         token=os.getenv("HF_TOKEN")
-)
+    )
+    
 except Exception as e:
     raise RuntimeError(f"Failed to download model from Hugging Face: {e}")
 

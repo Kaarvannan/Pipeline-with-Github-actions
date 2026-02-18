@@ -4,7 +4,7 @@ WORKDIR /Webapp
 
 COPY requirements.txt .
 COPY Iris.py .
-COPY HF_TOKEN.txt .
+# COPY HF_TOKEN.txt .
 
 RUN pip install -r requirements.txt
 
