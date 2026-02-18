@@ -18,10 +18,14 @@ jobs:
       - name: Dockerversion
         run: docker --version
 
-      - name: list all the filed in current directory
-        run: ls -la
+      - name: Set Image_tag
+        run: echo "Image_tag=test-app:${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: list docker images
+        run: docker images
+
       - name: Build Docker Image
-        run: docker build -t test-app:${{ github.sha }} .
+        run: docker build -t test-app:${Image_tag} .
 
       - name: Print success message
         run: echo "Build successful!"
