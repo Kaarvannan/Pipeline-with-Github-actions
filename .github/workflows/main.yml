@@ -36,7 +36,7 @@ jobs:
     needs: build
     steps:
       - name: list docker images
-        run: echo"Image builded in build ${{needs.build.outputs.Image_used2}}"
+        run: echo "Image builded in build ${{needs.build.outputs.Image_used2}}"
 
   deploy:
     runs-on: ubuntu-latest
