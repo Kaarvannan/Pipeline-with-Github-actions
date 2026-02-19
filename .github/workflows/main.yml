@@ -15,8 +15,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey= Kaarvannan_Pipeline-with-Github-actions
-            -Dsonar.organization= kaarvannan
+            -Dsonar.projectKey=Kaarvannan_Pipeline-with-Github-actions
+            -Dsonar.organization=kaarvannan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build:
