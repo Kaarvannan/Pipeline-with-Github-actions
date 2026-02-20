@@ -1,10 +1,10 @@
-name: PR Approval Workflow
+name: PR Approval Workflow 2
 
 
 on:
   pull_request_review:
     types: [submitted]
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
