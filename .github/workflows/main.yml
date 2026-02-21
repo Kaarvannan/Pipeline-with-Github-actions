@@ -44,7 +44,7 @@ jobs:
 
     - name: Build, Tag and Push Image to ECR
       run: |
-        IMAGE_TAG=${GITHUB_SHA::7}
+        IMAGE_TAG=${GITHUB_SHA::9}
         ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
         REGION=us-east-1
         REPO_NAME=githubactions/dockerimage
