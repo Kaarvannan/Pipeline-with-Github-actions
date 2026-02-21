@@ -53,7 +53,7 @@ jobs:
 
         ECR_URI=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME
 
-        docker build -t iris-app .
+        docker build -t iris-app:$IMAGE_TAG .
         docker tag iris-app:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
         docker push $ECR_URI:$IMAGE_TAG
 
