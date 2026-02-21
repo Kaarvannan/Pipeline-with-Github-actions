@@ -33,25 +33,28 @@ jobs:
     outputs:
       Image_used2: ${{steps.set_tag.outputs.Image_tag}}
     steps:
-      - name: Checkout COde
-        uses: actions/checkout@v4
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
 
-      - name: Show current directory
-        run: pwd
+    - name: Login to Amazon ECR
+      uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Dockerversion
-        run: docker --version
+    - name: Build, Tag and Push Image to ECR
+      run: |
+        IMAGE_TAG=${GITHUB_SHA::7}
+        ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
+        REGION=us-east-1
+        REPO_NAME=githubactions/dockerimage
 
-      - name: Set Image_tag
-        id: set_tag
-        run: |
-          TAG=${GITHUB_SHA::7}
-          echo "Image_tag=$TAG" >> $GITHUB_OUTPUT
+        ECR_URI=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME
 
-
-      - name: Build Docker Image
-        run: docker build -t iris-app:${{steps.set_tag.outputs.Image_tag}} .
-
+        docker build -t $REPO_NAME:$IMAGE_TAG .
+        docker tag $REPO_NAME:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
+        docker push $ECR_URI:$IMAGE_TAG
   test:
     runs-on: ubuntu-latest
     needs: build
