@@ -29,3 +29,5 @@ jobs:
         run: aws sts get-caller-identity
       - name: Test ECR
         run: aws ecr describe-repositories
+      - name: Test EKS
+        run: aws eks describe-cluster --name YOUR_CLUSTER --region us-east-1
