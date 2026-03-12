@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Sonar Scan
       uses: SonarSource/sonarcloud-github-action@v2
@@ -18,6 +20,7 @@ jobs:
           -Dsonar.projectKey=Kaarvannan_Pipeline-with-Github-actions
           -Dsonar.organization=kaarvannan
           -Dsonar.sources=.
+          -Dsonar.python.version=3.10
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
