@@ -31,3 +31,5 @@ jobs:
         run: aws ecr describe-repositories
       - name: Test EKS
         run: aws eks describe-cluster --name Eks-cluster --region us-east-1
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name Eks-cluster --region us-east-1
