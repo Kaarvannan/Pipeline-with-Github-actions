@@ -35,3 +35,8 @@ jobs:
         run: aws eks update-kubeconfig --name Eks-cluster --region us-east-1
       - name: Test kubectl
         run: kubectl get nodes
+      - name: Install Helm
+        run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+        
+      - name: Deploy with Helm
+        run: helm upgrade --install iris-release ./second_Deployment -f second_Deployment/values.yaml --wait --timeout 300s --atomic
