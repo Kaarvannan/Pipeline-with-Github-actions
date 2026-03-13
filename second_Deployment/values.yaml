@@ -1,0 +1,44 @@
+secrets:
+  name: my-secret
+configMap:
+  name: my-config
+persistentVolume:
+  name: pvc-volume
+persistentVolumeClaim:
+  name: pvc-volume
+service:
+  name: service-try
+  port: 80
+replica:
+  Count: 1
+pods:
+  name: my-app  
+
+initContainers:
+  secrets:
+   name: init-secrets
+  configMap:
+    name: init-configmap
+  pvc:
+    name: init-pvc
+
+containers:
+  firstcontainer: first-app
+  secondcontainer: second-app
+image:
+  backendtest: kaarvannan/testing
+  uitest: kaarvannan/test
+  uitag1: v1
+  backendtag1: v1
+
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+
+  host: chart-example.local
+
+  path: /
+  pathType: ImplementationSpecific

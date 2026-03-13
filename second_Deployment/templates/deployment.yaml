@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "second_Deployment.fullname" . }}
+  
+spec:
+  replicas: {{ .Values.replica.Count }}
+  selector:
+    matchLabels:
+      app: {{ .Values.pods.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.pods.name }}
+    spec:
+      volumes:
+        - name: secret-config
+          secret:
+            secretName: {{ .Values.secrets.name }}
+            items:
+              - key: Key
+                path: Key.txt
+              - key: username
+                path: username.txt
+              - key: password
+                path: password.txt
+
+        - name: config-map
+          configMap:
+            name: {{ .Values.configMap.name }}
+            items:
+              - key: version
+                path: version.txt
+              - key: env
+                path: env.txt
+        - name: pvc-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistentVolumeClaim.name }}
+
+      initContainers:
+        - name: {{ .Values.secrets.name }}
+          image: busybox
+          command: ["sh", "-c", "echo 'Secrets checked'"]
+          volumeMounts:
+            - name: secret-config
+              mountPath: /etc/secrets
+
+        - name:  {{ .Values.configMap.name }}
+          image: busybox
+          command: ["sh", "-c", "echo 'ConfigMap checked'"]
+          volumeMounts:
+            - name: config-map
+              mountPath: /etc/config
+        - name: {{ .Values.persistentVolumeClaim.name }}
+          image: busybox
+          command: ["sh", "-c", "echo 'PVC checked'"]
+          volumeMounts:
+            - name: pvc-volume
+              mountPath: /mnt/pvc
+        
+
+
+
+      containers:
+        - name: {{ .Values.containers.firstcontainer }}
+          image: 990227773016.dkr.ecr.us-east-1.amazonaws.com/githubactions/dockerimage:7cd0d2cfd
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: secret-config
+              mountPath: /etc/secrets
+            - name: config-map
+              mountPath: /etc/config
+            - name: {{ .Values.persistentVolumeClaim.name }}
+              mountPath: /mnt/pvc
+
+
+
