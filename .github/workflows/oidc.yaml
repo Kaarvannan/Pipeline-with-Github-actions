@@ -30,4 +30,4 @@ jobs:
       - name: Test ECR
         run: aws ecr describe-repositories
       - name: Test EKS
-        run: aws eks describe-cluster --name YOUR_CLUSTER --region us-east-1
+        run: aws eks describe-cluster --name Eks-cluster --region us-east-1
