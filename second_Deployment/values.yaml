@@ -10,7 +10,7 @@ service:
   name: service-try
   port: 80
 replica:
-  Count: 1
+  Count: 2
 pods:
   name: my-app  
 
@@ -42,3 +42,5 @@ ingress:
 
   path: /
   pathType: ImplementationSpecific
+
+  hftoken: ""

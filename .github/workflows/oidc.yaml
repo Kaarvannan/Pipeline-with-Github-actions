@@ -39,4 +39,6 @@ jobs:
         run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
         
       - name: Deploy with Helm
-        run: helm upgrade --install iris-release ./second_Deployment -f second_Deployment/values.yaml --wait --timeout 300s --atomic
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: helm upgrade --install iris-release ./second_Deployment --set hfToken=${{ secrets.HF_TOKEN }} --wait --timeout 300s --atomic
