@@ -32,7 +32,7 @@ jobs:
       - name: Test EKS
         run: aws eks describe-cluster --name Eks-cluster --region us-east-1
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name Eks-cluster --region us-east-1
+        run: aws eks update-kubeconfig --name Eks-cluster --region us-east-1 
       - name: Test kubectl
         run: kubectl get nodes
       - name: Install Helm
