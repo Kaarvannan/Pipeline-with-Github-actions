@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "second_Deployment.fullname" . }}
+  namespace: kube-system
   
   annotations:
     kubernetes.io/ingress.class: alb

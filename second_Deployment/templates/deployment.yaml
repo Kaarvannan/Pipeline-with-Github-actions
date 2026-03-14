@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "second_Deployment.fullname" . }}
+  namespace: kube-system
   
 spec:
   replicas: {{ .Values.replica.Count }}
@@ -24,6 +25,8 @@ spec:
                 path: username.txt
               - key: password
                 path: password.txt
+              - key: HF_TOKEN
+                path: HF_TOKEN.txt
 
         - name: config-map
           configMap:
@@ -63,7 +66,7 @@ spec:
 
       containers:
         - name: {{ .Values.containers.firstcontainer }}
-          image: 990227773016.dkr.ecr.us-east-1.amazonaws.com/githubactions/dockerimage:7cd0d2cfd
+          image: try-model:latest
           ports:
             - containerPort: 8000
           volumeMounts:
