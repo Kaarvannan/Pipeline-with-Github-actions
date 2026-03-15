@@ -25,8 +25,8 @@ spec:
                 path: username.txt
               - key: password
                 path: password.txt
-              - key: hftoken
-                path: hftoken.txt
+              - key: HF_TOKEN
+                path: HF_TOKEN.txt
 
         - name: config-map
           configMap:
@@ -67,6 +67,12 @@ spec:
       containers:
         - name: {{ .Values.containers.firstcontainer }}
           image: 990227773016.dkr.ecr.us-east-1.amazonaws.com/githubactions/dockerimage:7cd0d2cfd
+          env:
+          - name: HF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secrets.name }}
+                key: HF_TOKEN
           ports:
             - containerPort: 8000
           volumeMounts:
