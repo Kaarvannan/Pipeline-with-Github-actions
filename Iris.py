@@ -18,11 +18,10 @@ REQUEST_COUNT = Counter("iris_requests_total", "Total prediction requests")
 app = FastAPI(title="Iris Classifier API")
 
 Instrumentator().instrument(app).expose(app)
-
 # --- Step 1: Download model from Hugging Face ---
 try:
     model_path = hf_hub_download(
-        repo_id="Kaar7/Iris",
+        repo_id="Kaar7/Iris/tree",
         filename="model.pkl",
         token=os.getenv("HF_TOKEN")
     )
