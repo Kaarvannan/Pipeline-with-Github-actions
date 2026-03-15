@@ -66,7 +66,7 @@ spec:
 
       containers:
         - name: {{ .Values.containers.firstcontainer }}
-          image: 990227773016.dkr.ecr.us-east-1.amazonaws.com/githubactions/dockerimage:7cd0d2cfd
+          image: 990227773016.dkr.ecr.us-east-1.amazonaws.com/githubactions/dockerimage:ad9986e6f
           env:
           - name: HF_TOKEN
             valueFrom:
