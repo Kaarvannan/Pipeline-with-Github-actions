@@ -21,7 +21,7 @@ Instrumentator().instrument(app).expose(app)
 # --- Step 1: Download model from Hugging Face ---
 try:
     model_path = hf_hub_download(
-        repo_id="Kaar7/Iris/tree",
+        repo_id="Kaar7/Iris",
         filename="model.pkl",
         token=os.getenv("HF_TOKEN")
     )
