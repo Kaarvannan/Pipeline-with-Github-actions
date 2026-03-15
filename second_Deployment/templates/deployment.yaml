@@ -25,8 +25,8 @@ spec:
                 path: username.txt
               - key: password
                 path: password.txt
-              - key: HF_TOKEN
-                path: HF_TOKEN.txt
+              - key: hftoken
+                path: hftoken.txt
 
         - name: config-map
           configMap:
