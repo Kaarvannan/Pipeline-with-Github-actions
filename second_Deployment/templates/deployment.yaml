@@ -60,12 +60,9 @@ spec:
             - name: pvc-volume
               mountPath: /mnt/pvc
         
-
-
-
       containers:
         - name: {{ .Values.containers.firstcontainer }}
-          image: 990227773016.dkr.ecr.us-east-1.amazonaws.com/githubactions/dockerimage:7ddb82c6a
+          image: {{ .Values.image }}
           env:
           - name: HF_TOKEN
             valueFrom:
