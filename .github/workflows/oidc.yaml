@@ -4,7 +4,7 @@ name: Deploy with oidc
 on:
     push:
         branches:
-        - main
+        - main4
 
 jobs:
 
