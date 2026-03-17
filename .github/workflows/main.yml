@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: sonar
     outputs:
-      image: ${{ steps.set_repo.outputs.Image_to_be_used }}
+      image: ${{ steps.set_repo.outputs.image }}
 
     permissions:
       id-token: write
@@ -83,6 +83,8 @@ jobs:
         echo "image=$IMAGE_FULL" >> "$GITHUB_OUTPUT"
     
         echo "DEBUG_IMAGE=$IMAGE_FULL"
+    - name: Show step output
+      run: echo "STEP=${{ steps.set_repo.outputs.image }}"
 
   deploy:
     runs-on: ubuntu-latest
