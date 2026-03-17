@@ -77,7 +77,7 @@ jobs:
         docker tag iris-app:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
         docker push $ECR_URI:$IMAGE_TAG
         Image_Full=$ECR_URI:$IMAGE_TAG
-        echo "Image_to_be_used=$Image_to_be_used" >> $GITHUB_OUTPUT
+        echo "Image_to_be_used=$Image_Full" >> $GITHUB_OUTPUT
 
   deploy:
     runs-on: ubuntu-latest
