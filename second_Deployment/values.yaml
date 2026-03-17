@@ -44,3 +44,4 @@ ingress:
   pathType: ImplementationSpecific
 
   hftoken: ""
+  image: ""

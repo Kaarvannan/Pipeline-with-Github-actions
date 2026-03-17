@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: sonar
     outputs:
-      Image_used: ${{steps.set_repo.outputs.Image_to_be_used}}
+      Image_to_be_used: ${{steps.set_repo.outputs.Image_to_be_used}}
 
     permissions:
       id-token: write
