@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: sonar
     outputs:
-      Image_to_be_used: ${{ steps.set_repo.outputs.Image_to_be_used }}
+      image: ${{ steps.set_repo.outputs.Image_to_be_used }}
 
     permissions:
       id-token: write
@@ -80,7 +80,7 @@ jobs:
     
         IMAGE_FULL="$ECR_URI:$IMAGE_TAG"
     
-        echo "Image_to_be_used=$IMAGE_FULL" >> "$GITHUB_OUTPUT"
+        echo "image=$IMAGE_FULL" >> "$GITHUB_OUTPUT"
     
         echo "DEBUG_IMAGE=$IMAGE_FULL"
 
@@ -115,12 +115,12 @@ jobs:
       run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
     - name: Image used in build job
-      run: echo "Image used in build job is ${{ needs.build.outputs.Image_to_be_used }}"
+      run: echo "Image used in build job is ${{ needs.build.outputs.image }}"
 
       
     - name: Deploy with Helm
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      run: helm upgrade --install iris-release ./second_Deployment --set image=${{ needs.build.outputs.Image_to_be_used }} --set hftoken=${{ secrets.HF_TOKEN }} --wait --timeout 500s
+      run: helm upgrade --install iris-release ./second_Deployment --set image=${{ needs.build.outputs.image }} --set hftoken=${{ secrets.HF_TOKEN }} --wait --timeout 500s
 
 
