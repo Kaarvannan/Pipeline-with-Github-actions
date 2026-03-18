@@ -3,7 +3,7 @@ name: CI Phase 1 - Basic Build
 on:
   push:
     branches:
-      - main
+      - main5
 
 jobs:
   sonar:
