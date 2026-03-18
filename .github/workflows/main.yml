@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: sonar
     outputs:
-      image2: ${{ steps.set_repo.outputs.image }}
+      Image_to_be_used: ${{ steps.set_repo.outputs.Image_to_be_used }}
 
     permissions:
       id-token: write
@@ -65,26 +65,19 @@ jobs:
 
     - name: Build, Tag and Push Image to ECR
       id: set_repo
-      shell: bash
       run: |
         IMAGE_TAG=${GITHUB_SHA::9}
         ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
         REGION=us-east-1
         REPO_NAME=githubactions/dockerimage
-    
+
         ECR_URI=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME
-    
+
         docker build -t iris-app:$IMAGE_TAG .
         docker tag iris-app:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
         docker push $ECR_URI:$IMAGE_TAG
-    
-        IMAGE_FULL="$ECR_URI:$IMAGE_TAG"
-    
-        echo "image=$IMAGE_FULL" >> $GITHUB_OUTPUT
-    
-        echo "DEBUG_IMAGE=$IMAGE_FULL"
-    - name: Show step output
-      run: echo "STEP=${{ steps.set_repo.outputs.image }}"
+        Image_Full=$ECR_URI:$IMAGE_TAG
+        echo "Image_to_be_used=$Image_Full" >> $GITHUB_OUTPUT
 
   deploy:
     runs-on: ubuntu-latest
@@ -116,16 +109,12 @@ jobs:
     - name: Install Helm
       run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-    - name: Show all outputs
-      run: echo '${{ toJson(needs.build.outputs) }}'
-
-    - name: Image used in build job
-      run: echo "Image used in build job is ${{ needs.build.outputs.image2 }}"
-
+    - name: Debug image
+      run: echo "IMAGE=${{ needs.build.outputs.Image_to_be_used }}"
       
     - name: Deploy with Helm
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      run: helm upgrade --install iris-release ./second_Deployment --set image=${{ needs.build.outputs.image2 }} --set hftoken=${{ secrets.HF_TOKEN }} --wait --timeout 500s
+      run: helm upgrade --install iris-release ./second_Deployment --set image=${{ needs.build.outputs.Image_to_be_used }} --set hftoken=${{ secrets.HF_TOKEN }} --wait --timeout 500s
 
 
