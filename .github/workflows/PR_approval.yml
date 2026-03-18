@@ -2,8 +2,14 @@ name: PR Approval Workflow 2
 
 
 on:
+<<<<<<< HEAD
+  push:
+    branches:
+      - main
+=======
   push: 
     main
+>>>>>>> 4b9a2a4b201aa79a718801d63f4dfcdee872bd59
 
 jobs:
   build:
