@@ -2,8 +2,8 @@ name: PR Approval Workflow 2
 
 
 on:
-  pull_request_review:
-    types: [submitted]
+  push: 
+    main
 
 jobs:
   build:
