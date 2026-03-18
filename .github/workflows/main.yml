@@ -68,6 +68,7 @@ jobs:
       run: |
         TAG_NAME=${GITHUB_SHA::9}
         
+
         ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
         REGION=us-east-1
         REPO_NAME=githubactions/dockerimage
