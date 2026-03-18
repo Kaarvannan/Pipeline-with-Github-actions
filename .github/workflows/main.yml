@@ -66,7 +66,7 @@ jobs:
     - name: Build, Tag and Push Image to ECR
       id: set_repo
       run: |
-        TAG_NAME=${GITHUB_SHA::9}
+        IMAGE_TAG=${GITHUB_SHA::9}
         
         ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
         REGION=us-east-1
@@ -78,7 +78,7 @@ jobs:
         docker tag iris-app:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
         Full_Image_Name=$ECR_URI:$IMAGE_TAG 
         docker push $Full_Image_Name
-        echo "IMAGE_TAG=$TAG_NAME" >> $GITHUB_OUTPUT
+        echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
 
         echo "Image_to_be_used=$Full_Image_Name" >> $GITHUB_OUTPUT
 
