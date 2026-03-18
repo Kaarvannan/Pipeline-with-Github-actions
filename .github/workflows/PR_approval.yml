@@ -4,8 +4,7 @@ name: PR Approval Workflow 2
 on:
   push:
     branches:
-      - main
-
+      - main5
 jobs:
   build:
     runs-on: ubuntu-latest

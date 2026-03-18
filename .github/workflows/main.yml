@@ -3,7 +3,7 @@ name: CI Phase 1 - Basic Build
 on:
   push:
     branches:
-      - main5
+      - main
 
 jobs:
   sonar:
@@ -75,9 +75,10 @@ jobs:
 
         docker build -t iris-app:$IMAGE_TAG .
         docker tag iris-app:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
-        docker push $ECR_URI:$IMAGE_TAG
-        Image_Full=$ECR_URI:$IMAGE_TAG
-        echo "Image_to_be_used=$Image_Full" >> $GITHUB_OUTPUT
+        Full_Image_Name=$ECR_URI:$IMAGE_TAG 
+        docker push $Full_Image_Name
+        
+        echo "Image_to_be_used=$Full_Image_Name" >> $GITHUB_OUTPUT
 
   deploy:
     runs-on: ubuntu-latest
