@@ -68,7 +68,7 @@ jobs:
       run: |
         TAG_NAME=${GITHUB_SHA::9}
         
-        echo "IMAGE_TAG=$TAG_NAME" >> $GITHUB_OUTPUT
+
         ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
         REGION=us-east-1
         REPO_NAME=githubactions/dockerimage
@@ -79,7 +79,8 @@ jobs:
         docker tag iris-app:$IMAGE_TAG $ECR_URI:$IMAGE_TAG
         Full_Image_Name=$ECR_URI:$IMAGE_TAG 
         docker push $Full_Image_Name
-        
+        echo "IMAGE_TAG=$TAG_NAME" >> $GITHUB_OUTPUT
+
         echo "Image_to_be_used=$Full_Image_Name" >> $GITHUB_OUTPUT
 
   deploy:
