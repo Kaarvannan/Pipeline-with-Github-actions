@@ -80,7 +80,7 @@ jobs:
     
         IMAGE_FULL="$ECR_URI:$IMAGE_TAG"
     
-        echo "image=$IMAGE_FULL" >> "$GITHUB_OUTPUT
+        echo "image=$IMAGE_FULL" >> $GITHUB_OUTPUT
     
         echo "DEBUG_IMAGE=$IMAGE_FULL"
     - name: Show step output
