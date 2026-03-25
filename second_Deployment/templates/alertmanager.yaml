@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: email-config
+  namespace: kube-system
+  labels:
+    release: monitoring
+spec:
+  route:
+    receiver: kaarvannan
+
+  receivers:
+    - name: kaarvannan
+      emailConfigs:
+        - to: kaarvannan.97@gmail.com
+          from: kaarvannan.97@gmail.com
+          smarthost: smtp.gmail.com:587
+          authUsername: kaarvannan.97@gmail.com
+          authPassword:
+            name: alert
+            key: password
+          requireTLS: true
